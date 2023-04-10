@@ -13,7 +13,7 @@ export default function Home() {
   const [city, setCity] = useState('')
   const [weather, setWeather] = useState({})
   const [loading, setLoading] = useState(false)
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=dubai&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
 
   function fetchWeather (e) {
     e.preventDefault();
@@ -33,8 +33,17 @@ export default function Home() {
     layout='fill'
     className='object-cover'
     />
+<div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 '>
+  <form onSubmit={fetchWeather} className='flex justify-between items-center w-full m-auto p-3 bg-transparent border rounded-2xl '>
+    <div>
+      <input 
+      onChange={(e)=> setCity(e.target.value)}
+      className='bg-transparent border-none focus:outline-none text-2xl' type='text' placeholder='City Name'/>
+    </div>
+    <button onClick={fetchWeather}><BsSearch/></button>
+  </form>
+</div>
 
-    
     </div>
   )
 }
